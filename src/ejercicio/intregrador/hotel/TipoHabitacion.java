@@ -1,7 +1,7 @@
 package ejercicio.intregrador.hotel;
 
 public enum TipoHabitacion {
-    SIMPLE;
-    DOBLE;
+    SIMPLE,
+    DOBLE,
     SUITE;
 }
