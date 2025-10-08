@@ -14,7 +14,21 @@ public class Recepcionista extends Persona{
         return legajo;
     }
     
-    public void confirmarReserva(Reserva reserva, Hotel gotel){
+    public void confirmarReserva(Reserva reserva){
+        
+        if (reserva.isConfirmada()){
+            
+            System.out.println("Reserva confirmada");
+        }else{
+            
+            reserva.confirmar();
+            Cliente cliente = reserva.getCliente();
+            int numero_habitacion = reserva.getHabitacion().getNumero();
+            String notificacion = "Reserva confirmada por el cliente: " + cliente.getNombre()+ " para la habitacion"
+                    + numero_habitacion + " con un precio total de: " + reserva.calcularTotal();
+            
+            System.out.println(notificacion);
+        }
         
     }
     

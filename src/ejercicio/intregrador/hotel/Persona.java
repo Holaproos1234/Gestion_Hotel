@@ -52,5 +52,20 @@ public abstract class Persona{
         return sb.toString();
     }
     
+    public boolean equal(Object obj){
+        
+        if (this == obj){
+            return true;
+        }
+        else if (obj == null || this.getClass() != obj.getClass()){//comparo si son la misma clase
+            
+            return false;
+        }
+        
+       Persona otra_persona = (Persona) obj;
+       
+       return this.dni == otra_persona.dni && this.nombre == otra_persona.nombre;
+    }
+    
     
 }

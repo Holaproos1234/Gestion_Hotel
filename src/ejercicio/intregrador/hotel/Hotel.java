@@ -75,6 +75,19 @@ public class Hotel {
         return habitacionesDisponibles;
     }
     
+    public ArrayList<Reserva> getReservasConfirmadas(){
+        ArrayList<Reserva> reservas_confirmadas = new ArrayList <>();
+        
+        for (Reserva item : this.getReservasTotales() ){
+            if (item.isConfirmada()){
+                reservas_confirmadas.add(item);
+            }
+        }
+        
+        return reservas_confirmadas;
+    }
+    
+    
     public boolean estaHabitacionDisponible(Habitacion habitacion, LocalDate inicio, LocalDate fin){
         
         boolean disponibilidad = true;
@@ -87,7 +100,7 @@ public class Hotel {
                 LocalDate finReserva = item.getFechaFin();
                 LocalDate inicioSolicitud = inicio;
                 LocalDate finSolicitud = fin;
-                boolean solapados = inicioReserva.isBefore(finSolicitud)&& inicioSolicitud.isBefore(finReserva);
+                boolean solapados =! inicioReserva.isBefore(finSolicitud) || inicioSolicitud.isBefore(finReserva);
                 if (solapados){
                     disponibilidad = false;
                 }
@@ -95,4 +108,33 @@ public class Hotel {
         }
         return disponibilidad;
     }
+    
+    public Reserva buscarReservaPorCliente(Cliente cliente){
+        
+        for (Reserva item : reservasTotales){
+            
+            if (item.getCliente().equals(cliente)){// si son los mismos clientes
+                
+                return item;
+            }
+        }
+        
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hotel{");
+        sb.append("nombre=").append(nombre);
+        sb.append(", direccion=").append(direccion);
+        sb.append(", habitaciones=").append(habitaciones);
+        sb.append(", recepcionistas=").append(recepcionistas);
+        sb.append(", reservasTotales=").append(reservasTotales);
+        sb.append('}');
+        return sb.toString();
+    }
+    
+    
+    
 }
